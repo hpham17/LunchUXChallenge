@@ -1,6 +1,10 @@
 class FormsController < ApplicationController
   def new
     @form = Form.new
+    5.times do
+      @form.adults.build
+      @form.children.build
+    end
   end
   def create
     @form = Form.new(form_parameters)
@@ -15,6 +19,6 @@ class FormsController < ApplicationController
 
   private
   def form_parameters
-    params.require(:form).permit(:email, :password, :address, :children)
+    params.require(:form).permit(:address, adults_attributes: [:name], children_attributes: [:name])
   end
 end
