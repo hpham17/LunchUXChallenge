@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  earnings: 1
+  earning_times: MyString
+  public: 1
+  public_times: MyString
+  pensions: 1
+  pensions_times: MyString
+
+two:
+  name: MyString
+  earnings: 1
+  earning_times: MyString
+  public: 1
+  public_times: MyString
+  pensions: 1
+  pensions_times: MyString
