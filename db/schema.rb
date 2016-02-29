@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228013459) do
+ActiveRecord::Schema.define(version: 20160228042336) do
 
   create_table "adults", force: :cascade do |t|
     t.string   "name"
     t.integer  "earnings"
-    t.string   "earning_times"
+    t.string   "earnings_times"
     t.integer  "public"
     t.string   "public_times"
     t.integer  "pensions"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20160228013459) do
     t.string   "ethnicity"
     t.string   "race"
     t.boolean  "agrees"
+    t.integer  "child_income"
+    t.string   "child_income_times"
   end
 
 end

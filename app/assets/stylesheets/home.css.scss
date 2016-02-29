@@ -8,14 +8,11 @@
 * {margin: 0; padding: 0;}
 
 html {
-	height: 100%;
-	/*Image only BG fallback*/
-	background: url('http://thecodeplayer.com/uploads/media/gs.png');
-	/*background = gradient + image pattern combo*/
-	background:
-		linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)),
-		url('http://thecodeplayer.com/uploads/media/gs.png');
+    background-color: black;
+    opacity : 0.8;
+    z-index: 100;
 }
+
 
 body {
 	font-family: montserrat, arial, verdana;
@@ -31,7 +28,7 @@ body {
 }
 /*form styles*/
 #msform {
-	width: 400px;
+	width: 450px;
 	margin: 50px auto;
 	text-align: center;
 	position: relative;
@@ -44,7 +41,7 @@ body {
 	padding: 20px 30px;
 	box-sizing: border-box;
 	width: 80%;
-	margin: 0 10%;
+	margin: 90px 10%;
 
 	/*stacking fieldsets above each other*/
 	position: absolute;
@@ -59,12 +56,13 @@ fieldset:not(:first-of-type) {
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 10px;
-	width: 100%;
+	width: 90%;
 	box-sizing: border-box;
 	font-family: montserrat;
 	color: #2C3E50;
 	font-size: 13px;
 }
+
 /*buttons*/
 #msform .action-button {
 	width: 100px;
@@ -97,7 +95,6 @@ fieldset:not(:first-of-type) {
 /*progressbar*/
 #progressbar {
 	margin-bottom: 30px;
-	overflow: hidden;
 	/*CSS counters to number the steps*/
 	counter-reset: step;
 }
@@ -142,4 +139,18 @@ fieldset:not(:first-of-type) {
 #progressbar li.active:before,  #progressbar li.active:after{
 	background: #27AE60;
 	color: white;
+}
+
+[placeholder]:focus::-webkit-input-placeholder {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-transform: translate(120px, 0);
+    -moz-transform: translate(120px, 0);
+    -ms-transform: translate(120px, 0);
+    -o-transform: translate(120px, 0);
+    transform: translate(120px, 0);
+    opacity: 0;
 }

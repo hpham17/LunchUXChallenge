@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-tablesorter
+//= require bootstrap
 //= require turbolinks
 //= require underscore
 //= require json2

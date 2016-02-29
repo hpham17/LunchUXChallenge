@@ -1,5 +1,6 @@
+
 <!-- fieldsets -->
-  <%= simple_form_for(@form, html: {id: 'msform'}) do |f| %>
+  <%= simple_form_for(@form, html: {id: 'msform', class: 'form-vertical'}) do |f| %>
 	<ul id="progressbar">
 		<li class="active">Account Setup</li>
 		<li>Social Profiles</li>
@@ -10,7 +11,15 @@
 	</ul>
   <fieldset>
     <h3 class="fs-title">List ALL Household Members who are infants, children, and students up to and including grade 12</h3>
-    <%= f.input :email, placeholder: "Child's Full Name", label: false, :validate => true, input_html: {id: 'valid'} %>
+    <div class="tiptext">?
+<div class="description"> Here is the big fat description box</div>
+</div>
+    <%= f.fields_for :children  do |a| %>
+    <%= a.input :name, placeholder: "Child's Full Name", label: false, :validate => true, input_html: { id: 'valid'} %>
+    <%= a.input :status, label:false, input_html: { id: 'valid'}, default: false, collection: [['Student', 'Student'], ['Foster', 'Foster'], ['Homeless, Migrant, Runaway', 'Homeless, Migrant, Runaway']] %>
+      <% end %>
+    <input type="button" name="remove-child" class="remove-child action-button" value="Remove Child" />
+    <input type="button" name="add-child" class="add-child action-button" value="Add Child" />
     <input type="button" name="next" class="next action-button" value="Next" />
 	</fieldset>
   <fieldset>
@@ -21,23 +30,25 @@
   <fieldset>
     <h3 class="fs-title">Report Income for ALL Household Members (Skip this step if you answered ‘Yes’ to STEP 2)</h3>
     <h4>A. Child Income</h4>
-    <%= f.input :email, placeholder: "Child Income", label: false, :validate => true, input_html: {id: 'valid'} %>
-    <%= f.input :email, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid'} %>
+    <%= f.input :child_income, placeholder: "Child Income", label: false, :validate => true, input_html: {id: 'valid'} %>
+    <%= f.input :child_income_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid'} %>
     <h4>B. All Adult Household Members (including yourself) </h4>
     <%= f.fields_for :adults  do |b| %>
       <%= b.input :name, label: false, placeholder: 'Name' %>
       <%= b.input :earnings, placeholder: "Earnings from Work", label: false, :validate => true, input_html: {id: 'valid', class:'medium-input'} %>
-      <%= b.input :earning_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
-      <%= b.input :public, placeholder: "Public Assistance/
+      <%= b.input :earnings_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
+      <%= b.input :public, placeholder: "Public Assstance/
       Child Support/Alimony", label: false, :validate => true, input_html: {id: 'valid', class:'medium-input'} %>
       <%= b.input :public_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
-      <%= b.input :email, placeholder: "Pensions/Retirement/All Other Income", label: false, :validate => true, input_html: {id: 'valid', class:'medium-input'} %>
-      <%= b.input :email, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
+      <%= b.input :pensions, placeholder: "Pensions/Retirement/All Other Income", label: false, :validate => true, input_html: {id: 'valid', class:'medium-input'} %>
+      <%= b.input :pensions_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
     <% end %>
-    <%= f.input :email, placeholder: "Total Household Members
+    <input type="button" name="remove-adult" class="remove-adult action-button" value="Remove Adult" />
+    <input type="button" name="add-adult" class="add-adult action-button" value="Add Adult" />
+    <%= f.input :total_household_members, placeholder: "Total Household Members
 (Children and Adults)", label: false, :validate => true, input_html: {id: 'valid'} %>
-    <%= f.input :email, placeholder: "Last Four Digits of Social Security Number (SSN) of
-Primary Wage Earner or Other Adult Household Member", label: false, :validate => true, input_html: {id: 'valid'} %>
+    <%= f.input :ssn, placeholder: "Last Four Digits of Social Security Number (SSN) of
+Primary Wage Earner or Other Adult Household Member", label: false, :validate => true, input_html: {maxlength: 4, id: 'valid'} %>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
         <input type="button" name="next" class="next action-button" value="Next" />
 	</fieldset>
@@ -45,10 +56,7 @@ Primary Wage Earner or Other Adult Household Member", label: false, :validate =>
     <h3 class="fs-title">Contact information and adult signature</h3>
     <h4>“I certify (promise) that all information on this application is true and that all income is reported. I understand that this information is given in connection with the receipt of Federal funds, and that school officials
       may verify (check) the information. I am aware that if I purposely give false information, my children may lose meal benefits, and I may be prosecuted under applicable State and Federal laws.”</h3>
-      <%= f.input :street, placeholder: "Street Address (if available)", label: false, :validate => true, input_html: {id: 'valid'} %>
-      <%= f.input :city, placeholder: "City", label: false, :validate => true, input_html: {id: 'valid'} %>
-      <%= f.input :state, placeholder: "State", label: false, :validate => true, input_html: {id: 'valid', class:'medium-input'} %>
-      <%= f.input :zip, placeholder: "Zip", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
+      <%= f.input :address, placeholder: "Street Address (if available)", label: false, :validate => true, input_html: {id: 'valid'} %>
       <%= f.input :daytime_phone, placeholder: "Daytime Phone and Email (optional) ", label: false, :validate => true, input_html: {id: 'valid'} %>
       <%= f.input :signature, placeholder: "Typed signature of adult completing the form", label: false, :validate => true, input_html: {id: 'valid'} %>
 
@@ -57,14 +65,14 @@ Primary Wage Earner or Other Adult Household Member", label: false, :validate =>
 	</fieldset>
   <fieldset>
     <h3 class="fs-title">OPTIONAL Children's Racial and Ethnic Identities</h3>
-      <%= f.input :ethnicity, placeholder: 'Ethnicity', label: "Ethnicity", :validate => true, collection: [['Hispanic or Latino', 'Hispanic or Latino'], ['Not Hispanic or Latino', 'Not Hispanic or Latino']] %>
+      <%= f.input :ethnicity, placeholder: 'Ethnicity', label: "Ethnicity", input_html: { class: 'checkbox-inline'}, :validate => true, collection: [['Hispanic or Latino', 'Hispanic or Latino'], ['Not Hispanic or Latino', 'Not Hispanic or Latino']] %>
       <%= f.input :race, placeholder: 'Race', label: 'Race', :validate => true, collection: [['American Indian or Alaskan Native', 'American Indian or Alaskan Native'], ['Asian', 'Asian'], ['Black or African American', 'Black or African American'], ['Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander'], ['White', 'White',]], as: :check_boxes %>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
       <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
   <fieldset>
     <h3 class="fs-title">Review and Guidelines</h3>
-      <%= f.input :address, placeholder: 'The Richard B. Russell National School Lunch Act requires the information on this
+      <%= f.input :agrees, placeholder: 'The Richard B. Russell National School Lunch Act requires the information on this
 application. You do not have to give the information, but if you do not, we cannot
 approve your child for free or reduced price meals. You must include the last four
 digits of the social security number of the adult household member who signs the
@@ -101,7 +109,7 @@ Individuals who are deaf, hard of hearing or have speech disabilities may contac
 USDA through the Federal Relay Service at (800) 877-8339; or (800) 845-6136 (Spanish).
 
 USDA is an equal opportunity provider and employer.', label: false, :disabled => true, as: :text %>
-      <%= f.input :address, placeholder: 'Accept', label: false, :validate => true %>
+      <%= f.input :address, placeholder: 'Accept', label: false, :validate => true, as: :radio_buttons %>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
       <%= f.button :submit %>
   </fieldset>

@@ -19,6 +19,6 @@ class FormsController < ApplicationController
 
   private
   def form_parameters
-    params.require(:form).permit(:address, adults_attributes: [:name], children_attributes: [:name])
+    params.require(:form).permit(:total_household_members, :ssn, :signature, :child_income, :child_income_times, :ethinicity, :race, :case_number, :daytime_phone, :agrees, :address, adults_attributes: [:name], children_attributes: [:name])
   end
 end
