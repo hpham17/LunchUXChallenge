@@ -112,8 +112,6 @@ $(document).ready ->
           return
         easing: 'easeInOutBack'
       return
-  $('.submit').click ->
-    false
   return
 
 # ---

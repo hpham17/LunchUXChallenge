@@ -15,7 +15,4 @@
 //= require jquery-tablesorter
 //= require bootstrap
 //= require turbolinks
-//= require underscore
-//= require json2
-//= require judge
 //= require_tree .

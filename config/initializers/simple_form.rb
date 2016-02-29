@@ -40,7 +40,6 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     ## Inputs
-    b.use :judge
     b.use :label_input
     b.use :hint,  wrap_with: { tag: :span, class: :hint }
     b.use :error, wrap_with: { tag: :span, class: :error }
@@ -143,4 +142,5 @@ SimpleForm.setup do |config|
 
   # Default class for inputs
   # config.input_class = nil
+  config.input_class = "form-control"
 end

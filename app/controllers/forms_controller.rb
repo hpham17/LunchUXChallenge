@@ -12,13 +12,13 @@ class FormsController < ApplicationController
       flash[:info] = "Saved"
       redirect_to root_path
     else
-      flash[:danger] = "Not saved"
+      flash[:danger] = "There was an error submitting your application. Please fix it and try again."
       render 'new'
     end
   end
 
   private
   def form_parameters
-    params.require(:form).permit(:total_household_members, :ssn, :signature, :child_income, :child_income_times, :ethinicity, :race, :case_number, :daytime_phone, :agrees, :address, adults_attributes: [:name], children_attributes: [:name])
+    params.require(:form).permit!
   end
 end

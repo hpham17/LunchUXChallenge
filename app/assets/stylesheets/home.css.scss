@@ -8,9 +8,15 @@
 * {margin: 0; padding: 0;}
 
 html {
-    background-color: black;
-    opacity : 0.8;
-    z-index: 100;
+	background:
+	linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+	linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+	linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+	linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+	linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+	linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+	background-color: #131313;
+	background-size: 20px 20px;
 }
 
 
@@ -20,13 +26,13 @@ body {
 
 .medium-input {
 	float: left;
-  width: 160px !important;
+  width: 185px !important;
 }
 .small-input {
 	float: left;
-  width: 100px !important;
+  width: 115px !important;
 }
-/*form styles*/
+/*form styles #941818*/
 #msform {
 	width: 450px;
 	margin: 50px auto;
@@ -40,7 +46,7 @@ body {
 	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 	padding: 20px 30px;
 	box-sizing: border-box;
-	width: 80%;
+	width: 88%;
 	margin: 90px 10%;
 
 	/*stacking fieldsets above each other*/
@@ -56,7 +62,7 @@ fieldset:not(:first-of-type) {
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 10px;
-	width: 90%;
+	width: 92%;
 	box-sizing: border-box;
 	font-family: montserrat;
 	color: #2C3E50;
@@ -66,7 +72,7 @@ fieldset:not(:first-of-type) {
 /*buttons*/
 #msform .action-button {
 	width: 100px;
-	background: #27AE60;
+	background: #941818;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -84,12 +90,12 @@ fieldset:not(:first-of-type) {
 	font-size: 15px;
 	text-transform: uppercase;
 	color: #2C3E50;
-	margin-bottom: 10px;
+	margin-bottom: 26px;
 }
 .fs-subtitle {
 	font-weight: normal;
 	font-size: 13px;
-	color: #666;
+	color: #A94442;
 	margin-bottom: 20px;
 }
 /*progressbar*/
@@ -137,7 +143,7 @@ fieldset:not(:first-of-type) {
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #27AE60;
+	background: #941818;
 	color: white;
 }
 
