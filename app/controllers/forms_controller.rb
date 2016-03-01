@@ -1,6 +1,10 @@
 class FormsController < ApplicationController
   def index
     @forms = Form.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data FormCsv.to_csv @forms }
+    end
   end
   def new
     @form = Form.new
