@@ -1,5 +1,5 @@
 <!-- Form -->
-<%= simple_form_for(@form, validate: true, html: {id: 'msform' } ) do |f| %>
+<%= simple_form_for(@form, html: {id: 'msform' }) do |f| %>
 
 <ul id="progressbar">
   <li class="active"></li>
@@ -9,86 +9,118 @@
   <li></li>
   <li>Submit</li>
 </ul>
-<div class="form-inputs">
+
 <!-- First Step -->
 <fieldset style="width:80%;">
   <h3 class="fs-title">List ALL Household Members who are infants, children, and students up to and including grade 12</h3>
-  <div class="tiptext">?
-    <div class="description"><p>Definition of Household Member: “Anyone who is living with you and shares income and expenses, even if not related.”
-    </p><p>
-    Children in Foster care and children who meet the definition of Homeless, Migrant or Runaway are
-    eligible for free meals. Read How to Apply for Free and Reduced Price School Meals for more information.</div>
-  </p>
-  </div>
   <%= f.fields_for :children  do |a| %>
-  <%= a.input :name, placeholder: "Child's Full Name", label: false, :validate => true, input_html: { id: 'valid'} %>
-  <%= a.input :status, label:false, input_html: { id: 'valid'}, default: false, collection: [['Student', 'Student'], ['Foster', 'Foster'], ['Homeless, Migrant, Runaway', 'Homeless, Migrant, Runaway']] %>
+    <%= a.input :name, placeholder: "Child's Full Name", label: false, input_html: { id: 'valid'} %>
+    <%= a.input :status, label:false, input_html: { id: 'valid'}, default: false, collection: [['Student', 'Student'], ['Foster', 'Foster'], ['Homeless, Migrant, Runaway', 'Homeless, Migrant, Runaway']] %>
   <% end %>
   <input type="button" name="remove-child" class="remove-child action-button" value="Remove Child" />
   <input type="button" name="add-child" class="add-child action-button" value="Add Child" />
   <input type="button" name="next" class="next action-button" value="Next" />
+  <div class="form_children_name description"><p>Definition of Household Member: “Anyone who is living with you and shares income and expenses, even if not related.”</p>
+    <p>Children in Foster care and children who meet the definition of Homeless, Migrant or Runaway are eligible for free meals. Read How to Apply for Free and Reduced Price School Meals for more information.</p>
+  </div>
 </fieldset>
+
 
 <!-- Second Step -->
 <fieldset>
   <h3 class="fs-title">Do any Household Members (including you) currently participate in one or more of the following assistance programs: SNAP, TANF, or FDPIR?</h3>
   <p>If so, please enter your case number and press 'Yes'</p>
-  <div class="tiptext">?
-    <div class="description"><p>If anyone in your household participates in the assistance programs listed below, your children are eligible for free school meals:
-    </p>
+<%= f.input :case_number, placeholder: "Case Number", label: false %>
+<input type="button" name="skip" class="skip action-button" value="Yes" />
+<input type="button" name="next" class="next action-button" value="No" />
+<input type="button" name="previous" class="previous action-button" value="Previous" />
+<div id="form_case_number" class="description"><p>If anyone in your household participates in the assistance programs listed below, your children are eligible for free school meals:
+</p>
 <ul>
-  	<li>The Supplemental Nutrition Assistance Program (SNAP) or [insert State SNAP here]</li>
-  	<li>Temporary Assistance for Needy Families (TANF) or [insert State TANF here]</li>
-  	<li>The Food Distribution Program on Indian Reservations (FDPIR)</li>
-  </ul>
-  </div>
-  </div>
-  <%= f.input :case_number, placeholder: "Case Number", label: false, input_html: {class: 'case-number'} %>
-  <input type="button" name="skip" class="skip action-button" value="Yes" />
-  <input type="button" name="next" class="next action-button" value="No" />
-  <input type="button" name="previous" class="previous action-button" value="Previous" />
+  <li>The Supplemental Nutrition Assistance Program (SNAP) or [insert State SNAP here]</li>
+  <li>Temporary Assistance for Needy Families (TANF) or [insert State TANF here]</li>
+  <li>The Food Distribution Program on Indian Reservations (FDPIR)</li>
+</ul>
+</div>
+
 </fieldset>
 
 <!-- Third Step -->
 <fieldset>
   <h3 class="fs-title">Report Income for ALL Household Members (Skip this step if you answered ‘Yes’ to STEP 2)</h3>
   <h4 class="fs-subtitle">A. Child Income</h4>
-  <div class="tiptext">?
-    <div class="description">Child income is money received from outside your household that is paid directly to your children. Many households do not have any child income. Use the chart below to determine if your household has child income to report.</div>
-  </div>
-  <%= f.input :child_income, placeholder: "Child Income", label: false, :validate => true, input_html: {class: "number", id: 'valid'}, :minlength=>"10" %>
-  <div class="tiptext">?
-    <div class="description"> Here is the big fat description box</div>
-  </div>
-  <%= f.input :child_income_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month'], ['Bimonthly'], ['Monthly'], ['Monthly']] %>
-  <h4 class="fs-subtitle">B. All Adult Household Members (including yourself) </h4>
-  <div class="tiptext">?
-    <div class="description"> Here is the big fat description box</div>
-  </div>
+  <%= f.input :child_income, placeholder: "Child Income in $", label: false, input_html: { class: 'medium-input', id: ' child_income valid'} %>
+  <%= f.input :child_income_times, placeholder: "How Often?", default: false, label: false, input_html: { class: 'small-input', id: 'valid'},
+  collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
+  <h3 class="fs-subtitle" style="padding-top:60px;">B. All Adult Household Members (including yourself) </h3>
   <%= f.fields_for :adults  do |b| %>
-    <%= b.input :name, label: false, placeholder: 'Name' %>
-    <%= b.input :earnings, placeholder: "Earnings from Work", label: false, :validate => true, input_html: {id: 'valid', class:'medium-input'} %>
-    <%= b.input :earnings_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
-    <%= b.input :public, placeholder: "Public Assistance/Child Support/Alimony", label: false, :validate => true, input_html: {id: 'valid', class:'medium-input'} %>
-    <%= b.input :public_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
-    <%= b.input :pensions, placeholder: "Pensions/Retirement/All Other Income", label: false, :validate => true, input_html: {id: 'valid', class:'medium-input'} %>
-    <%= b.input :pensions_times, placeholder: "How Often?", label: false, :validate => true, input_html: {id: 'valid', class:'small-input'} %>
+    <%= b.input :name, label: false, placeholder: 'Adult Full Name' %>
+    <%= b.input :earnings, placeholder: "Earnings from Work in $", label: false, input_html: {id: 'valid', class:'medium-input'} %>
+    <%= b.input :earnings_times, placeholder: "How Often?", default: false, label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
+    <%= b.input :public, placeholder: "Public Assistance/Child Support/Alimony", label: false,  input_html: {id: 'valid', class:'medium-input'} %>
+    <%= b.input :public_times, placeholder: "How Often?", default: false, label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
+    <%= b.input :pensions, placeholder: "Pensions/Retirement/All Other Income", label: false, input_html: {id: 'valid', class:'medium-input'} %>
+    <%= b.input :pensions_times, placeholder: "How Often?", default: false, label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
   <% end %>
   <input type="button" name="remove-adult" class="remove-adult action-button" value="Remove Adult " />
   <input type="button" name="add-adult" class="add-adult action-button" value="Add Adult" />
   <div></div>
-  <div class="tiptext">?
-    <div class="description"> Here is the big fat description box</div>
-  </div>
-  <%= f.input :total_household_members, placeholder: "Total Household Members
-  (Children and Adults)", label: false, :validate => true, input_html: {id: 'valid'} %>
-  <div class="tiptext">?
-    <div class="description"> Here is the big fat description box</div>
-  </div>
+
+  <%= f.input :total_household_members, placeholder: "Total Household Members", label: false, input_html: {id: 'valid'} %>
+
   <%= f.input :ssn, placeholder: "Last Four Digits of Social Security Number (SSN) of
-  Primary Wage Earner or Other Adult Household Member", label: false, :validate => true, input_html: {maxlength: 4, id: 'valid'} %>
+  Primary Wage Earner or Other Adult Household Member", label: false, input_html: {maxlength: 4, id: 'valid'} %>
   <input type="button" name="previous" class="previous action-button" value="Previous" />
   <input type="button" name="next" class="next action-button" value="Next" />
+  <div id="child_income" class="form_child_income description"><p>If anyone in your household participates in the assistance programs listed below, your children are eligible for free school meals:
+  </p>
+  <ul>
+    <li>The Supplemental Nutrition Assistance Program (SNAP) or [insert State SNAP here]</li>
+    <li>Temporary Assistance for Needy Families (TANF) or [insert State TANF here]</li>
+    <li>The Food Distribution Program on Indian Reservations (FDPIR)</li>
+  </ul>
+  </div>
+  <div id="child_income" class="form_adults_earnings description">
+    <ul>
+      <li>-Salary, wages, cash bonuses</li>
+	    <li>-Net income from self-employment (farm or business)</li>
+	    <li>-Strike benefits</li>
+    </ul>
+    <p><strong>If you are in the U.S. Military:</strong></p>
+      <ul>
+	     <li>-Basic pay and cash bonuses (do NOT include combat pay, FSSA or privatized housing allowances)</li>
+	      <li>-Allowances for off-base housing, food, and clothing</li>
+      </ul>
+  </div>
+  <div id="child_income" class="form_adults_public description">
+    <ul>
+      <li>-Unemployment benefits</li>
+      <li>-Worker’s compensation</li>
+      <li>-Supplemental Security Income (SSI)</li>
+      <li>-Cash assistance from State or local government</li>
+      <li>-Alimony payments</li>
+      <li>-Child support payments</li>
+      <li>-Veteran’s benefits</li>
+    </ul>
+  </div>
+  <div id="child_income" class="form_adults_pensions description">
+    <ul>
+      <li>-Social Security (including railroad retirement and black lung benefits)</li>
+      <li>-Private Pensions or disability</li>
+      <li>-Income from trusts or estates</li>
+      <li>-Annuities</li>
+      <li>-Investment income</li>
+      <li>-Earned interest</li>
+      <li>-Rental income</li>
+      <li>-Regular cash payments from outside household</li>
+    </ul>
+  </div>
+  <div class="form_total_household_members description">
+    <p>Enter the total number of household members in the field “Total Household Members (Children and Adults).” This number MUST be equal to the number of household members listed in STEP 1 and STEP 3. If there are any members of your household that you have not listed on the application, go back and add them. It is very important to list all household members, as the size of your household determines your income cutoff for free and reduced price meals.</p>
+  </div>
+  <div class="form_ssn description">
+    <p>Provide the last four digits of your Social Security Number. The household’s primary wage earner or another adult household member must enter the last four digits of their Social Security Number in the space provided. You are eligible to apply for benefits even if you do not have a Social Security Number. If no adult household members have a Social Security Number, leave this space blank.</p>
+  </div>
 </fieldset>
 
 <!-- Fourth Step -->
@@ -96,9 +128,9 @@
   <h3 class="fs-title">Contact information and adult signature</h3>
   <h4>“I certify (promise) that all information on this application is true and that all income is reported. I understand that this information is given in connection with the receipt of Federal funds, and that school officials
     may verify (check) the information. I am aware that if I purposely give false information, my children may lose meal benefits, and I may be prosecuted under applicable State and Federal laws.”</h3>
-    <%= f.input :address, placeholder: "Street Address (if available)", label: false, :validate => true, input_html: {id: 'valid'} %>
-    <%= f.input :daytime_phone, placeholder: "Daytime Phone and Email (optional) ", label: false, :validate => true, input_html: {id: 'valid'} %>
-    <%= f.input :signature, placeholder: "Typed signature of adult completing the form", label: false, :validate => true, input_html: {id: 'valid'} %>
+    <%= f.input :address, placeholder: "Street Address (if available)", label: false, input_html: {id: 'valid'} %>
+    <%= f.input :daytime_phone, placeholder: "Daytime Phone and Email (optional) ", label: false, input_html: {id: 'valid'} %>
+    <%= f.input :signature, placeholder: "Typed signature of adult completing the form", label: false, input_html: {id: 'valid'} %>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
@@ -107,8 +139,8 @@
   <fieldset style="width:78%;">
     <h3 class="fs-title">OPTIONAL Children's Racial and Ethnic Identities</h3>
     <h3 class="fs-subtitle">Ethnicity</h3>
-    <%= f.input :ethnicity, label: false, input_html: { class: 'checkbox-inline'}, :validate => true, include_blank: false, collection: [['Hispanic or Latino', 'Hispanic or Latino'], ['Not Hispanic or Latino', 'Not Hispanic or Latino']] %>
-    <h3 class="fs-subtitle">Race</h3><%= f.input_field :race, label: 'Race', input_html: {  class: 'checkbox-inline'}, as: :check_boxes, boolean_style: :inline, :validate => true, collection: [['American Indian or Alaskan Native', 'American Indian or Alaskan Native'],
+    <%= f.input :ethnicity, label: false, input_html: { class: 'checkbox-inline'}, include_blank: false, collection: [['Hispanic or Latino', 'Hispanic or Latino'], ['Not Hispanic or Latino', 'Not Hispanic or Latino']] %>
+    <h3 class="fs-subtitle">Race</h3><%= f.input_field :race, label: 'Race', input_html: {  class: 'checkbox-inline'}, as: :check_boxes, boolean_style: :inline, collection: [['American Indian or Alaskan Native', 'American Indian or Alaskan Native'],
     ['Asian', 'Asian'], ['Black or African American', 'Black or African American'],
     ['Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander'], ['White', 'White']], include_blank: false %>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
@@ -119,34 +151,33 @@
   <fieldset>
     <h3 class="fs-title">Review and Guidelines</h3>
     <%= f.input :agrees, placeholder: 'The Richard B. Russell National School Lunch Act requires the information on this application. You do not have to give the information, but if you do not, we cannot approve your child for free or reduced price meals. You must include the last four digits of the social security number of the adult household member who signs the application. The last four digits of the social security number is not required when you apply on behalf of a foster child or you list a Supplemental Nutrition Assistance Program (SNAP), Temporary Assistance for Needy Families (TANF) Program or Food Distribution Program on Indian Reservations (FDPIR) case number or other FDPIR identifier for your child or when you indicate that the adult
-household member signing the application does not have a social security number. We will use your information to determine if your child is eligible for free or reduced price meals, and for administration
-and enforcement of the lunch and breakfast programs. We MAY share your eligibility information with education, health, and nutrition programs to help them evaluate, fund, or determine benefits for their programs, auditors for program reviews,
-and law enforcement officials to help them look into violations of program rules.
+    household member signing the application does not have a social security number. We will use your information to determine if your child is eligible for free or reduced price meals, and for administration
+    and enforcement of the lunch and breakfast programs. We MAY share your eligibility information with education, health, and nutrition programs to help them evaluate, fund, or determine benefits for their programs, auditors for program reviews,
+    and law enforcement officials to help them look into violations of program rules.
 
-The U.S Department of Agriculture prohibits discrimination against its customers, employees, and applicants for employment on the bases of race, color, national origin,
-age, disability, sex, gender identity, religion, reprisal, and where applicable, political beliefs, marital status, familial or parental status, sexual orientation, or all or part of an individual’s income is derived from any public assistance program, or protected
-genetic information in employment or in any program or activity conducted or funded by the Department. (Not all prohibited bases will apply to all programs and/or employment activities.)
+    The U.S Department of Agriculture prohibits discrimination against its customers, employees, and applicants for employment on the bases of race, color, national origin,
+    age, disability, sex, gender identity, religion, reprisal, and where applicable, political beliefs, marital status, familial or parental status, sexual orientation, or all or part of an individual’s income is derived from any public assistance program, or protected
+    genetic information in employment or in any program or activity conducted or funded by the Department. (Not all prohibited bases will apply to all programs and/or employment activities.)
 
-If you wish to file a Civil Rights program complaint of discrimination, complete the USDA Program Discrimination Complaint Form, found online at http://www.ascr.usda.gov/complaint_filing_cust.html,
-or at any USDA office, or call (866) 632-9992 to request the form. You may also write a letter containing all of the information requested
-in the form. Send your completed complaint form or letter to us by mail at U.S. Department of Agriculture, Director, Ofce of Adjudication, 1400 Independence
-Avenue, S.W., Washington, D.C. 20250-9410, by fax (202) 690-7442 or email at program.intake@usda.gov.
+    If you wish to file a Civil Rights program complaint of discrimination, complete the USDA Program Discrimination Complaint Form, found online at http://www.ascr.usda.gov/complaint_filing_cust.html,
+    or at any USDA office, or call (866) 632-9992 to request the form. You may also write a letter containing all of the information requested
+    in the form. Send your completed complaint form or letter to us by mail at U.S. Department of Agriculture, Director, Ofce of Adjudication, 1400 Independence
+    Avenue, S.W., Washington, D.C. 20250-9410, by fax (202) 690-7442 or email at program.intake@usda.gov.
 
-Individuals who are deaf, hard of hearing or have speech disabilities may contact
-USDA through the Federal Relay Service at (800) 877-8339; or (800) 845-6136 (Spanish).
+    Individuals who are deaf, hard of hearing or have speech disabilities may contact
+    USDA through the Federal Relay Service at (800) 877-8339; or (800) 845-6136 (Spanish).
 
-USDA is an equal opportunity provider and employer.', label: false, :disabled => true, as: :text %>
-        <%= f.input :agrees, label: false, as: :boolean, html: {class: "agree"},checked_value: true, unchecked_value: false %>
-        <h3 id="agree">Accept</h3>
-        <input type="button" name="previous" class="previous action-button" value="Previous" />
-        <%= f.button :submit %>
-      </fieldset>
-    </div>
-      <% end %>
+    USDA is an equal opportunity provider and employer.', label: false, :disabled => true, as: :text %>
 
+    <input type="button" name="previous" class="previous action-button" style="width:309px;" value="Previous" />
+    <%= f.button :submit %>
+  </fieldset>
+
+  <% end %>
 
 
-<!-- jQuery -->
-<script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-<!-- jQuery easing plugin -->
-<script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script>
+
+  <!-- jQuery -->
+  <script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+  <!-- jQuery easing plugin -->
+  <script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script>

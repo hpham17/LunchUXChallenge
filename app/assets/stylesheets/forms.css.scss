@@ -38,10 +38,16 @@
     height: 23px;
 }
 .description {
+    margin-bottom: 100px;
+    padding: 10px;
+    bottom: 0px;
+    right: auto;
+    left: 418px;
+    margin-top: 100px;
+    width: 180px;
     font-family: inherit;
     font-size: 13px;
     text-align: left;
-    width:300px;
     display:none;
     position:absolute;
     background: #fff;
@@ -65,8 +71,12 @@
 	display: none;
 }
 
+.inline-block {
+  display: inline-block;
+}
 .form_adults_name input {
   float: left;
+  width: 100% !important;
 }
 
 .form_agrees textarea {

@@ -26,7 +26,7 @@ body {
 
 .medium-input {
 	float: left;
-  width: 185px !important;
+  width: 221px !important;
 }
 .small-input {
 	float: left;
@@ -58,7 +58,7 @@ fieldset:not(:first-of-type) {
 }
 /*inputs*/
 #msform input, #msform textarea {
-	padding: 15px;
+	/*padding: 15px;*/
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 10px;
@@ -71,8 +71,8 @@ fieldset:not(:first-of-type) {
 
 /*buttons*/
 #msform .action-button {
-	width: 100px;
-	background: #941818;
+	width: 130px;
+	background: #188094;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -96,7 +96,8 @@ fieldset:not(:first-of-type) {
 	font-weight: normal;
 	font-size: 13px;
 	color: #A94442;
-	margin-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 /*progressbar*/
 #progressbar {
@@ -143,9 +144,10 @@ fieldset:not(:first-of-type) {
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #941818;
+	background: #188094;
 	color: white;
 }
+
 
 [placeholder]:focus::-webkit-input-placeholder {
     -webkit-transition: all 0.2s ease-in-out;
