@@ -2,6 +2,7 @@ development:
   adapter: postgresql
   encoding: unicode
   host: localhost
+  database: lunchuxchallenge_development
   username: hubennj
   password:
 
@@ -27,5 +28,14 @@ test:
   adapter: postgresql
   encoding: unicode
   host: localhost
+  database: lunchuxchallenge_test
   username: hubennj
   password:
+
+
+production:
+   adapter: postgresql
+   encoding: unicode
+   database: lunchuxchallenge_production
+   username: hubennj
+   password:
