@@ -9,8 +9,14 @@
   text-align: center;
 }
 
+.form-group {
+  margin-bottom: 0px;
+}
+
 .checkbox input[type="checkbox"] {
-  width: initial !important;
+  height: 15px;
+  width: 16px !important;
+  margin-bottom: 0px;
 }
 .boolean.form_agrees {
   margin-left: 123px;
@@ -28,15 +34,7 @@
   padding-left: 0;
   float: left;
 }
-.tiptext {
-    transition: $main-color 0.5s ease;
-    float: right;
-    background:#ccc;
-    border: 1px #333 solid;
-    padding:0px;
-    width:20px;
-    height: 23px;
-}
+
 .description {
     margin-bottom: 100px;
     padding: 10px;

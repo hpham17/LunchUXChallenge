@@ -62,7 +62,7 @@ fieldset:not(:first-of-type) {
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 10px;
-	width: 92%;
+	width: 100%;
 	box-sizing: border-box;
 	font-family: montserrat;
 	color: #2C3E50;
@@ -97,7 +97,7 @@ fieldset:not(:first-of-type) {
 	font-size: 13px;
 	color: #A94442;
 	margin-top: 20px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 /*progressbar*/
 #progressbar {

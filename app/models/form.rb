@@ -1,6 +1,6 @@
 class Form < ActiveRecord::Base
-  validates :children, :signature, presence: true
-  validates :ssn, length: { minimum: 4 , maximum: 4 }
+  validates :address, :signature, presence: true
+  validates :ssn, length: { maximum: 4 }
   has_many :adults
   has_many :children
   validates_associated :adults
