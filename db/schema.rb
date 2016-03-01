@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160301021511) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "adults", force: :cascade do |t|
     t.string   "name"
     t.integer  "earnings"
@@ -34,6 +37,25 @@ ActiveRecord::Schema.define(version: 20160301021511) do
     t.integer  "form_id"
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",                     default: 0, null: false
+    t.integer  "attempts",                     default: 0, null: false
+    t.text     "handler",                                  null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by",        limit: 255
+    t.string   "queue",            limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "progress_stage",   limit: 255
+    t.integer  "progress_current",             default: 0
+    t.integer  "progress_max",                 default: 0
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "forms", force: :cascade do |t|
     t.string   "address"
     t.datetime "created_at",              null: false
@@ -48,6 +70,13 @@ ActiveRecord::Schema.define(version: 20160301021511) do
     t.boolean  "agrees"
     t.integer  "child_income"
     t.string   "child_income_times"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "email",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
