@@ -15,7 +15,7 @@
   <h3 class="fs-title">List ALL Household Members who are infants, children, and students up to and including grade 12</h3>
   <%= f.fields_for :children  do |a| %>
     <%= a.input :name, placeholder: "Child's Full Name", label: false, input_html: { id: 'valid'} %>
-    <%= a.input :status, label:false, input_html: { id: 'valid'}, default: false, collection: [['Student', 'Student'], ['Foster', 'Foster'], ['Homeless, Migrant, Runaway', 'Homeless, Migrant, Runaway']] %>
+    <%= a.input :status, include_blank: "Please select a status", label: false, input_html: { id: 'valid'}, collection: [['Student', 'Student'], ['Foster', 'Foster'], ['Homeless, Migrant, Runaway', 'Homeless, Migrant, Runaway']] %>
   <% end %>
   <input type="button" name="remove-child" class="remove-child action-button" value="Remove Child" />
   <input type="button" name="add-child" class="add-child action-button" value="Add Child" />
@@ -50,17 +50,17 @@
   <h3 class="fs-title">Report Income for ALL Household Members (Skip this step if you answered ‘Yes’ to STEP 2)</h3>
   <h4 class="fs-subtitle">A. Child Income</h4>
   <%= f.input :child_income, placeholder: "Child Income in $", label: false, input_html: { class: 'medium-input', id: ' child_income valid'} %>
-  <%= f.input :child_income_times, placeholder: "How Often?", default: false, label: false, input_html: { class: 'small-input', id: 'valid'},
+  <%= f.input :child_income_times, placeholder: "How Often?", label: false, input_html: { class: 'small-input', id: 'valid'},
   collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
   <h3 class="fs-subtitle" style="padding-top:60px;">B. All Adult Household Members (including yourself) </h3>
   <%= f.fields_for :adults  do |b| %>
     <%= b.input :name, label: false, placeholder: 'Adult Full Name' %>
     <%= b.input :earnings, placeholder: "Earnings from Work in $", label: false, input_html: {id: 'valid', class:'medium-input'} %>
-    <%= b.input :earnings_times, placeholder: "How Often?", default: false, label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
+    <%= b.input :earnings_times, placeholder: "How Often?", label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
     <%= b.input :public, placeholder: "Public Assistance/Child Support/Alimony", label: false,  input_html: {id: 'valid', class:'medium-input'} %>
-    <%= b.input :public_times, placeholder: "How Often?", default: false, label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
+    <%= b.input :public_times, placeholder: "How Often?", label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
     <%= b.input :pensions, placeholder: "Pensions/Retirement/All Other Income", label: false, input_html: {id: 'valid', class:'medium-input'} %>
-    <%= b.input :pensions_times, placeholder: "How Often?", default: false, label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
+    <%= b.input :pensions_times, placeholder: "How Often?", label: false, input_html: { class: 'small-input', id: 'valid'}, collection: [['Weekly', 'Weekly'], ['Biweekly', 'Biweekly'], ['Twice A Month', 'Bimonthly'], ['Monthly', 'Monthly']] %>
   <% end %>
   <input type="button" name="remove-adult" class="remove-adult action-button" value="Remove Adult " />
   <input type="button" name="add-adult" class="add-adult action-button" value="Add Adult" />
