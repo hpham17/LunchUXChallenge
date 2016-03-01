@@ -18,5 +18,7 @@
 //= require_tree .
 
 $(document).ready(function() {
-  $("#forms").tablesorter();
+  $("#forms").tablesorter({
+    sortList: [[7,1]]
+  });
 });
