@@ -89,3 +89,25 @@
 .active {
   display: block;
 }
+
+#form_case_number {
+  width: 246px !important;
+  margin-left: 24px;
+}
+
+.input-group-addon {
+  padding: 5px 21px;
+}
+
+.form_child_income_times select {
+  margin-left: 225px;
+  margin-top: 10px;
+}
+
+.form_adults_pensions_times select {
+  margin-bottom: 30px;
+}
+
+.form-group .input-group input {
+  margin-bottom: 0px !important;
+}
