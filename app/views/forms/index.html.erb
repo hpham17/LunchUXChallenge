@@ -27,15 +27,11 @@
                 </td>
                 <td>
                   <% t.adults.each do |a| %>
-                    <%= t.name %>
+                    <%= a.name %>
                   <% end %>
                 </td>
-                <td>
-                  <%= t.total_household_members %>
-                </td>
-                <td>
-                  <%= t.ethnicity %>
-                </td>
+                <td><%= t.total_household_members %></td>
+                <td><%= t.ethnicity %></td>
                 <td><%= t.race %></td>
                 <td><%= t.ssn %></td>
                 <td><%= t.created_at.strftime("%d/%m/%y")%></td>
